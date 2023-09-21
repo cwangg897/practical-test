@@ -4,6 +4,7 @@ package sample.cafekiosk.spring.domain;
 import javax.persistence.*;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -21,6 +22,16 @@ public class Product {
 
     @Enumerated(EnumType.STRING)
     private ProductType type;
+
+
+    @Builder
+    public Product(String productNumber, ProductType type, ProductSellingStatus sellingStatus, String name, int price) {
+        this.productNumber = productNumber;
+        this.type = type;
+        this.sellingStatus = sellingStatus;
+        this.name = name;
+        this.price = price;
+    }
 
     @Enumerated(EnumType.STRING)
     private ProductSellingStatus sellingStatus;
