@@ -1,4 +1,4 @@
-package sample.cafekiosk.spring.domain;
+package sample.cafekiosk.spring.domain.product;
 
 import java.util.List;
 
@@ -15,4 +15,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
      */
     List<Product> findAllBySellingStatusIn(List<ProductSellingStatus> sellingTypes);
 
+
+    List<Product> findAllByProductNumberIn(List<String> productNumbers);
 }
