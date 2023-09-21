@@ -33,6 +33,14 @@ public class OrderService {
         List<String> productNumbers = request.getProductNumbers();
         List<Product> products = findProductsBy(productNumbers);
 
+        deductStockQuantities(products);
+
+        Order order = Order.create(products, registeredDateTime);
+        Order savedOrder = orderRepository.save(order);
+        return OrderResponse.of(savedOrder);
+    }
+
+    public void deductStockQuantities(List<Product> products) {
         // 재고 차감 시도
 
         // 재고와 관련된 상품번호만 골라오기
@@ -58,10 +66,6 @@ public class OrderService {
             }
             stock.deductQuantity(quantity);
         }
-
-        Order order = Order.create(products, registeredDateTime);
-        Order savedOrder = orderRepository.save(order);
-        return OrderResponse.of(savedOrder);
     }
 
     private List<Product> findProductsBy(List<String> productNumbers) {
